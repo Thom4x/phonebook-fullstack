@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 // Parametros de Conexion FASE 1
-const password = process.env.MONGODB_PASSWORD
 const url = process.env.MONGODB_URI
 
 // Establecer conexion y manejar errores FASE 2

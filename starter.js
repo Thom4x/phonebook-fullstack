@@ -7,7 +7,6 @@ const Person = require('./models/phone') // se importa el modelo de Mongoose par
 
 const app = express()
 const path = require('path')
-const { error } = require('console')
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.use(cors()) // se habilita el middleware cors para permitir solicitudes desde cualquier origen
@@ -58,7 +57,7 @@ app.get('/api/persons/:id', (request, response) => {
     // }
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
     //const id = Number(request.params.id)
     //const initialLength = phoneBook.length
 
@@ -70,7 +69,7 @@ app.delete('/api/persons/:id', (request, response) => {
     //    response.status(404).json({ error: "ID Not found.." })
     //}
     Person.findByIdAndDelete(request.params.id)
-        .then(idDeleted => {
+        .then(() => {
             response.status(202).end()
         }).catch(error => {
             next(error)
